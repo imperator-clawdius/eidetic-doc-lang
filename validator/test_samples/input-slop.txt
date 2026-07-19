@@ -1,0 +1,9 @@
+Environment variables are an incredibly important aspect of making SuiteScrape work properly. It is worth noting that they allow you to configure the application without having to change any code. As previously mentioned, they are stored in a .env file located in the root directory of the project. Interestingly, you can use them to control API keys, database connections, and logging levels.
+
+In order to set up environment variables, you first need to navigate to the root directory. Typically, you would open a terminal and use the cd command. However, once you're there, you'll find the .env file already exists if you cloned the repository. If not, you can create it manually.
+
+Now, let's dive into how to actually configure the variables. Generally speaking, you should add one variable per line. The format is KEY=VALUE. It's important to note that there should be no spaces around the equals sign. As you can see, this is fairly straightforward.
+
+When it comes to the API key in particular, it is perhaps the most important variable. You might need to get this from your SuiteScrape dashboard. Interestingly, the system will also accept a DATABASE_URL which should point to your PostgreSQL instance. All things considered, environment variables provide a very flexible way to manage configuration across different environments.
+
+Unfortunately, many users forget to add the .env file to their .gitignore. This would be a potentially serious security issue. So make sure you never commit this file to version control. At the end of the day, it's a simple step that saves you from a lot of headache.

@@ -1,0 +1,7 @@
+{
+  "vague_modifiers": ["very","really","quite","somewhat","slightly","highly","extremely","fairly","rather"],
+  "filler_transitions": ["however","therefore","moreover","furthermore","additionally","in addition","nevertheless","nonetheless","consequently","thus","hence","accordingly","let's dive in","let's explore","let's take a look","it is worth noting","it is important to","it should be noted","as previously mentioned","as discussed earlier","notably","interestingly","in order to"],
+  "hedging": ["perhaps","possibly","presumably","supposedly","generally","typically","often","usually","normally","in many cases","in most cases","as a general rule","probably","conceivably","potentially"],
+  "meta_commentary": ["as you can see","as i mentioned","as we saw","it is important to note","it should be noted that","it goes without saying","needless to say","interestingly","notably"],
+  "banned_openers": ["However,","Moreover,","Furthermore,","Additionally,","Notably,","Interestingly,","Importantly,","Essentially,","Basically,","Arguably,","Admittedly,","Fortunately,","Unfortunately,"]
+}

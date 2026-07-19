@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TRIDENT-DOC word lists — comprehensive concrete nouns and action verbs
+Eidetic Documentation Language (EDL) word lists — comprehensive concrete nouns and action verbs
 for technical documentation claim-checking.
 """
 

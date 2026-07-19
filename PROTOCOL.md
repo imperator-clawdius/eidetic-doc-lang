@@ -1,4 +1,4 @@
-# TRIDENT-DOC Protocol
+# Eidetic Documentation Language (EDL) Protocol
 
 ## Controlled Verbosity for AI-Generated Technical Documentation
 
@@ -10,11 +10,11 @@
 
 ## 1. Overview
 
-TRIDENT-DOC is a three-tier controlled verbosity protocol for AI-generated technical documentation. It solves one problem: **LLMs generate verbose, information-sparse prose filled with hedges, filler transitions, and meta-commentary.**
+Eidetic Documentation Language (EDL) is a three-tier controlled verbosity protocol for AI-generated technical documentation. It solves one problem: **LLMs generate verbose, information-sparse prose filled with hedges, filler transitions, and meta-commentary.**
 
 STE-100 (Simplified Technical English) proved that vocabulary and grammar constraints produce clearer documentation. But STE-100 was designed for non-native readers in aerospace maintenance — not for AI-generated content. Raw STE-100 overcorrects, stripping prose to a skeleton with no room for explanation, examples, or context.
 
-TRIDENT-DOC adapts the STE-100 insight into a tiered system that scales verbosity by document context. The forbidden list stays constant. The density matrix changes by mode.
+Eidetic Documentation Language (EDL) adapts the STE-100 insight into a tiered system that scales verbosity by document context. The forbidden list stays constant. The density matrix changes by mode.
 
 ---
 
@@ -241,8 +241,8 @@ Is the document a tutorial, onboarding walkthrough, or conceptual guide?
 ### 7.1 System Prompt — All Modes
 
 ```
-You write technical documentation following the TRIDENT-DOC protocol.
-TRIDENT-DOC eliminates AI-slop: no filler transitions, no hedging, 
+You write technical documentation following the Eidetic Documentation Language (EDL) protocol.
+Eidetic Documentation Language (EDL) eliminates AI-slop: no filler transitions, no hedging, 
 no vague modifiers, no meta-commentary.
 
 PERMANENT RULES (all modes):
@@ -342,7 +342,7 @@ A document **FAILS** validation when:
 ### 8.3 Rewrite Protocol
 
 When a document fails:
-1. Run the verbatim text through the same LLM with a "rewrite to pass TRIDENT-DOC validation" instruction
+1. Run the verbatim text through the same LLM with a "rewrite to pass Eidetic Documentation Language (EDL) validation" instruction
 2. Append the validation report to the rewrite prompt
 3. Re-validate the output
 4. Repeat until pass or manual intervention
@@ -410,7 +410,7 @@ instead of a .env file for sensitive values. The variable names remain the same.
 
 ### 10.1 LLM Compatibility
 
-TRIDENT-DOC works with any instruction-following LLM. The permanent forbidden list and mode-specific rules should be placed:
+Eidetic Documentation Language (EDL) works with any instruction-following LLM. The permanent forbidden list and mode-specific rules should be placed:
 - **System prompt** — permanent forbidden list (Layer 1)
 - **User prompt prefix** — mode-specific instructions (Layer 2)
 

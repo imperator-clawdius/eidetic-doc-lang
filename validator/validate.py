@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-TRIDENT-DOC Validator v1.0
-Validates text against the TRIDENT-DOC controlled verbosity protocol.
+Eidetic Documentation Language (EDL) Validator v1.0
+Validates text against the Eidetic Documentation Language (EDL) controlled verbosity protocol.
 Modes: terse | balanced | expanded
 """
 
@@ -276,7 +276,7 @@ def _density_grade(score):
 def format_report(results):
     lines = []
     lines.append("=" * 60)
-    lines.append("TRIDENT-DOC VALIDATION REPORT")
+    lines.append("Eidetic Documentation Language (EDL) VALIDATION REPORT")
     lines.append("=" * 60)
     lines.append(f"Mode:              {results['mode'].upper()}")
     lines.append(f"Verdict:           {'PASS' if results['pass'] else 'FAIL'}")
@@ -335,7 +335,7 @@ def format_report(results):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="TRIDENT-DOC Validator")
+    parser = argparse.ArgumentParser(description="Eidetic Documentation Language (EDL) Validator")
     parser.add_argument("--mode", choices=["terse", "balanced", "expanded"], default="balanced")
     parser.add_argument("--input", "-i", help="Input file path")
     parser.add_argument("--text", "-t", help="Inline text")

@@ -29,9 +29,28 @@ The validator checks:
 
 ## Quick Start
 
+```bash
+# Validate a doc against the Balanced register
+python3 validator.py sample_doc.md
 
+# Specify a register explicitly
+python3 validator.py sample_doc.md --register eidetic-terse
 
-## Full Protocol Spec
+# Run the built-in test suite
+python3 -m pytest test_validator.py -v
+```
+
+Example document structure:
+
+```markdown
+# API Reference: User Endpoints
+
+The authentication endpoint accepts POST requests.
+It returns a 201 status on success.
+A 401 status indicates invalid credentials.
+```
+
+Save as `docs/api.md`, then run `python3 validator.py docs/api.md` to check it against the Balanced register (default).
 
 See [PROTOCOL.md](PROTOCOL.md) for complete rules, prompt templates, and register definitions.
 

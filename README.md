@@ -29,16 +29,39 @@ The validator checks:
 
 ## Quick Start
 
+Requires Python 3.10 or newer; no third-party packages are needed. Run module
+commands from the repository root (`python` on Windows).
+
 ```bash
 # Validate a doc against the Balanced register
-python3 validator.py sample_doc.md
+python3 -m validator.validate --input sample_doc.md
 
 # Specify a register explicitly
-python3 validator.py sample_doc.md --register eidetic-terse
+python3 -m validator.validate --input sample_doc.md --mode terse
+
+# Validate inline text with a machine-readable report
+python3 -m validator.validate --text "The server sends data." --json
+
+# Read UTF-8 text from standard input
+python3 -m validator.validate --json < sample_doc.md
 
 # Run the built-in test suite
-python3 -m pytest test_validator.py -v
+python3 -m unittest discover -s tests -v
 ```
+
+The direct script also works: `python3 validator/validate.py --input sample_doc.md`.
+From another directory, use the absolute script path. File input, piped input,
+and output use UTF-8, including redirected output on Windows. Choose one of
+`--input` or `--text`; omitting both reads standard input. Modes are `terse`,
+`balanced` (default), and `expanded`.
+
+Exit status is `0` for a passing heuristic verdict, `1` for a failing verdict,
+and `2` for invalid usage or unreadable/empty input. With `--json`, input errors
+produce an `error` object; argument parsing errors print usage to stderr.
+The imported `validate(text, mode)` function and its existing scoring rules are
+unchanged. These English word-list and pattern checks assess writing style;
+they do not verify facts, evidence, security, or technical correctness. Human
+review remains necessary, even when the result is PASS.
 
 Example document structure:
 
@@ -50,7 +73,7 @@ It returns a 201 status on success.
 A 401 status indicates invalid credentials.
 ```
 
-Save as `docs/api.md`, then run `python3 validator.py docs/api.md` to check it against the Balanced register (default).
+Save as `docs/api.md`, then run `python3 -m validator.validate --input docs/api.md` to check it against the Balanced register (default).
 
 See [PROTOCOL.md](PROTOCOL.md) for complete rules, prompt templates, and register definitions.
 

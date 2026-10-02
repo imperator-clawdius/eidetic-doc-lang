@@ -10,11 +10,14 @@ import re
 import sys
 from pathlib import Path
 
-# Load word lists
-from validator.wordlists import CONCRETE_NOUNS, ACTION_VERBS
+# Support both module invocation and the direct script path from any directory.
+if __package__:
+    from .wordlists import CONCRETE_NOUNS, ACTION_VERBS
+else:
+    from wordlists import CONCRETE_NOUNS, ACTION_VERBS
 
 FW_PATH = Path(__file__).resolve().parent.parent / "templates" / "forbidden-words.json"
-with open(FW_PATH) as f:
+with open(FW_PATH, encoding="utf-8") as f:
     FORBIDDEN = json.load(f)
 
 MODES = {
@@ -333,31 +336,47 @@ def format_report(results):
     return "\n".join(lines)
 
 
-def main():
+def main(argv=None):
     import argparse
     parser = argparse.ArgumentParser(description="Eidetic Documentation Language (EDL) Validator")
     parser.add_argument("--mode", choices=["terse", "balanced", "expanded"], default="balanced")
-    parser.add_argument("--input", "-i", help="Input file path")
-    parser.add_argument("--text", "-t", help="Inline text")
+    source = parser.add_mutually_exclusive_group()
+    source.add_argument("--input", "-i", help="UTF-8 input file path")
+    source.add_argument("--text", "-t", help="Inline text (otherwise read UTF-8 stdin)")
     parser.add_argument("--json", action="store_true", help="Output JSON")
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
-    if args.input:
-        with open(args.input) as f:
-            text = f.read()
-    elif args.text:
-        text = args.text
-    else:
-        text = sys.stdin.read()
+    def input_error(message):
+        if args.json:
+            print(json.dumps({"error": message}, ensure_ascii=False))
+        else:
+            print(f"Input error: {message}", file=sys.stderr)
+        return 2
+
+    try:
+        if args.input is not None:
+            text = Path(args.input).read_text(encoding="utf-8")
+        elif args.text is not None:
+            text = args.text
+        else:
+            text = sys.stdin.read()
+    except (OSError, UnicodeError) as exc:
+        return input_error(f"Cannot read input: {exc}")
+    if not text.strip():
+        return input_error("Provide non-empty documentation text.")
 
     results = validate(text, mode=args.mode)
 
     if args.json:
-        print(json.dumps(results, indent=2))
+        print(json.dumps(results, indent=2, ensure_ascii=False))
     else:
         print(format_report(results))
+    return 0 if results["pass"] else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.stdin.reconfigure(encoding="utf-8")
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+    raise SystemExit(main())
